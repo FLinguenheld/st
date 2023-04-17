@@ -12,3 +12,17 @@ The config is edited in the *config.def.h*, the install will create a copy in *c
 Download them in the folder */patches*, patch and reinstall:
 
     patch --merge -i /path/to/patch.diff
+
+---
+To see the modifier list:
+
+    xmodmap
+
+To see key's names:
+
+    xev
+
+
+---
+#### Credits
+Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
