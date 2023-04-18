@@ -4,14 +4,23 @@ Source code :
 
     git clone https://git.suckless.org/st
 
-The config is edited in the *config.def.h*, the install will create a copy in *config.h*:
+The config is edited in the *config.def.h*.  
+The installation will create a copy named *config.h*:
 
-    sudo rm -f config.h && sudo make clean install
+    rm -f config.h
+    sudo sudo make clean install
 
 [Patches](https://st.suckless.org/patches/):  
 Download them in the folder */patches*, patch and reinstall:
 
     patch --merge -i /path/to/patch.diff
+
+
+---
+requirements:
+    fontconfig
+    libX11
+    libXft
 
 ---
 To see the modifier list:
