@@ -1,18 +1,24 @@
 /* See LICENSE file for copyright and license details. */
 
+
 /*
  * appearance
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 // static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static char *font = "mono:pixelsize=15:antialias=true:autohint=true";
+// static char *font = "mono:pixelsize=15:antialias=true:autohint=true";
+static char *font = "JetBrains Mono Nerd Font:pixelsize=15:antialias=true:autohint=true";
+// static char *font = "FiraCode Nerd Font:pixelsize=15:antialias=true:autohint=true";
+// static char *font = "FuraMono Nerd Font:pixelsize=15:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
     "Hack Nerd Font:pixelsize=15:antialias=true:autohint=true", // Powerline
     "IPAGothic:pixelsize=15:antialias=true:autohint=true", // Japanese
     "Symbola:pixelsize=15:antialias=true:autohint=true" // Unicode
 };
+
+
 static int borderpx = 2;
 
 /*
