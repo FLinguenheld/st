@@ -210,6 +210,7 @@ static char *copyurlcmd[] = { "/bin/sh", "-c",
 	"sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' | dmenu -w $(xdotool getactivewindow) -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
 	"externalpipe", NULL };
 
+static char *copypwd[] = { "/bin/sh", "-c", "pwd | xclip -selection clipboard -r", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -227,7 +228,7 @@ static Shortcut shortcuts[] = {
 
 	// { TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	// { TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+	// { TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 
@@ -236,6 +237,9 @@ static Shortcut shortcuts[] = {
 
     { TERMMOD,          	XK_U,           externalpipe,   {.v = openurlcmd } },
 	{ TERMMOD,          	XK_Y,           externalpipe,   {.v = copyurlcmd } },
+
+	// { TERMMOD,              XK_P,    copypwd,        {.i =  0} },
+	{ TERMMOD,          	XK_P,           externalpipe,   {.v = copypwd } },
 };
 
 /*

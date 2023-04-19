@@ -8,7 +8,8 @@ The config is edited in the *config.def.h*.
 The installation will create a copy named *config.h*:
 
     rm -f config.h
-    sudo sudo make clean install
+    sudo make uninstall
+    sudo make clean install
 
 [Patches](https://st.suckless.org/patches/):  
 Download them in the folder */patches*, patch and reinstall:
@@ -19,8 +20,8 @@ Download them in the folder */patches*, patch and reinstall:
 ---
 requirements:
     fontconfig
-    libX11
-    libXft
+    libx11-dev
+    libxft-dev
 
 ---
 To see the modifier list:
