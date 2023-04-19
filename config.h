@@ -210,7 +210,10 @@ static char *copyurlcmd[] = { "/bin/sh", "-c",
 	"sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' | dmenu -w $(xdotool getactivewindow) -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
 	"externalpipe", NULL };
 
-static char *copypwd[] = { "/bin/sh", "-c", "pwd | xclip -selection clipboard -r", "externalpipe", NULL };
+// static char *copypwd[] = { "/bin/sh", "-c", "pwd | xclip -selection clipboard -r", "externalpipe", NULL };
+static char *copypwd[] = { "/bin/sh", "-c",
+    "pidof $SHELL | xargs pwdx | awk '{print $2}' | uniq | dmenu -p 'Copy which dirctory?' -l 10 | xclip -selection clipboard",
+    "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
