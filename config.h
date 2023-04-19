@@ -14,7 +14,6 @@ static char *font = "JetBrains Mono Nerd Font:pixelsize=15:antialias=true:autohi
 /* Spare fonts */
 static char *font2[] = {
     "Hack Nerd Font:pixelsize=15:antialias=true:autohint=true", // Powerline
-    "IPAGothic:pixelsize=15:antialias=true:autohint=true", // Japanese
     "Symbola:pixelsize=15:antialias=true:autohint=true" // Unicode
 };
 
@@ -187,8 +186,8 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ XK_ANY_MOD,            Button4, kscrollup,      {.i = 1} },
-	{ XK_ANY_MOD,            Button5, kscrolldown,    {.i = 1} },
+	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1} },
+	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1} },
 
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
@@ -201,19 +200,23 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
-/* External pipe URL */
+/* External pipe */
 static char *openurlcmd[] = { "/bin/sh", "-c",
 	"sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'| uniq | sed 's/^www./http:\\/\\/www\\./g' | dmenu -w $(xdotool getactivewindow) -i -p 'Follow which url?' -l 10 | xargs -r xdg-open",
 	"externalpipe", NULL };
 
 static char *copyurlcmd[] = { "/bin/sh", "-c",
-	"sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' | dmenu -w $(xdotool getactivewindow) -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard",
+	"sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' | dmenu -w $(xdotool getactivewindow) -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard -r",
 	"externalpipe", NULL };
 
-// static char *copypwd[] = { "/bin/sh", "-c", "pwd | xclip -selection clipboard -r", "externalpipe", NULL };
 static char *copypwd[] = { "/bin/sh", "-c",
-    "pidof $SHELL | xargs pwdx | awk '{print $2}' | uniq | dmenu -p 'Copy which dirctory?' -l 10 | xclip -selection clipboard",
+    "pidof $SHELL | xargs pwdx | awk '{print $2}' | uniq | dmenu -p 'Copy which dirctory?' -l 10 | xclip -selection clipboard -r",
     "externalpipe", NULL };
+
+static char *copytest[] = { "/bin/sh", "-c",
+    "cat ~/.config/st/emojis.txt | uniq | dmenu -p 'Select one' -l 30 | awk '{print $1}' | xclip -selection clipboard -r",
+    "externalpipe", NULL };
+
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -232,17 +235,15 @@ static Shortcut shortcuts[] = {
 	// { TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	// { TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	// { TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
-	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 
-	{ XK_ANY_MOD,            XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ XK_ANY_MOD,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ XK_ANY_MOD,           XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ XK_ANY_MOD,           XK_Page_Down,   kscrolldown,    {.i = -1} },
 
-    { TERMMOD,          	XK_U,           externalpipe,   {.v = openurlcmd } },
-	{ TERMMOD,          	XK_Y,           externalpipe,   {.v = copyurlcmd } },
+    { TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } },
+	{ TERMMOD,              XK_Y,           externalpipe,   {.v = copyurlcmd } },
+	{ TERMMOD,              XK_P,           externalpipe,   {.v = copypwd } },
 
-	// { TERMMOD,              XK_P,    copypwd,        {.i =  0} },
-	{ TERMMOD,          	XK_P,           externalpipe,   {.v = copypwd } },
+	{ TERMMOD,              XK_O,           externalpipe,   {.v = copytest } },
 };
 
 /*
