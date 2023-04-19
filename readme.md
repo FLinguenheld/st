@@ -19,6 +19,7 @@ Download them in the folder */patches*, patch and reinstall:
 
 ---
 requirements:
+
     fontconfig
     libx11-dev
     libxft-dev

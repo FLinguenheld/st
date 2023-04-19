@@ -213,8 +213,9 @@ static char *copypwd[] = { "/bin/sh", "-c",
     "pidof $SHELL | xargs pwdx | awk '{print $2}' | uniq | dmenu -p 'Copy which dirctory?' -l 10 | xclip -selection clipboard -r",
     "externalpipe", NULL };
 
-static char *copytest[] = { "/bin/sh", "-c",
-    "cat ~/.config/st/emojis.txt | uniq | dmenu -p 'Select one' -l 30 | awk '{print $1}' | xclip -selection clipboard -r",
+static char *copyemoji[] = { "/bin/sh", "-c",
+    // "cat ~/.config/st/emojis.txt | sort -i | dmenu -p 'Select one' -l 15 | awk '{print $1}' | xclip -selection clipboard -r",
+    "cat ~/.config/st/emojis.txt | dmenu -p 'Select one' -l 15 | awk '{print $1}' | xclip -selection clipboard -r",
     "externalpipe", NULL };
 
 
@@ -243,7 +244,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           externalpipe,   {.v = copyurlcmd } },
 	{ TERMMOD,              XK_P,           externalpipe,   {.v = copypwd } },
 
-	{ TERMMOD,              XK_O,           externalpipe,   {.v = copytest } },
+	{ TERMMOD,              XK_E,           externalpipe,   {.v = copyemoji } },
 };
 
 /*
