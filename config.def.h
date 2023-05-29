@@ -226,7 +226,7 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 
-    { TERMMOD,              XK_plus,            zoom,           {.f = +1} }, // +
+  { TERMMOD,              XK_plus,            zoom,           {.f = +1} }, // +
 	{ TERMMOD,              XK_underscore,      zoom,           {.f = -1} }, // -
 	{ ControlMask,          XK_equal,           zoomreset,      {.f =  0} },
 
@@ -240,11 +240,14 @@ static Shortcut shortcuts[] = {
 	{ XK_ANY_MOD,           XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ XK_ANY_MOD,           XK_Page_Down,   kscrolldown,    {.i = -1} },
 
-    { TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } },
+  { TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } },
 	{ TERMMOD,              XK_Y,           externalpipe,   {.v = copyurlcmd } },
 	{ TERMMOD,              XK_P,           externalpipe,   {.v = copypwd } },
 
 	{ TERMMOD,              XK_E,           externalpipe,   {.v = copyemoji } },
+
+
+	{ TERMMOD,              XK_W,      newterm,        {.i =  0} },
 };
 
 /*
