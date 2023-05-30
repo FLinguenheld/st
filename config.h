@@ -246,8 +246,9 @@ static Shortcut shortcuts[] = {
 
 	{ TERMMOD,              XK_E,           externalpipe,   {.v = copyemoji } },
 
-
 	{ TERMMOD,              XK_Return,    newterm,        {.i =  0} },
+
+	{ TERMMOD,              XK_M,           invert,         { }       },
 };
 
 /*
