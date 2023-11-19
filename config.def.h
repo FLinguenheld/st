@@ -164,6 +164,8 @@ static unsigned int defaultattr = 11;
  */
 static uint forcemousemod = ShiftMask;
 
+#include "autocomplete.h"
+
 /*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
@@ -180,6 +182,7 @@ static MouseShortcut mshortcuts[] = {
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask | ShiftMask)
+#define ACMPL_MOD (ControlMask | ShiftMask)
 
 /* External pipe */
 static char *openurlcmd[] = {"/bin/sh", "-c",
@@ -213,8 +216,9 @@ static char *help[] = {
                   "+-= : Zoom        C/V : Copy/Paste    \n"
                   " U  : Open URL     M  : Invert colours\n"
                   " Y  : Copy URL     ⏎  : New terminal  \n"
-                  " P  : Copy PWD                        \n"
-                  " E  : Copy emoji                      \n'",
+                  " W  : Copy PWD     N  : Autocompletion\n"
+                  " E  : Copy emoji   S  : AC-suffix     \n'",
+                  "                   P  : AC-Cancel     \n'",
     "externalpipe", NULL};
 // clang-format on
 
@@ -243,13 +247,28 @@ static Shortcut shortcuts[] = {
 
     {TERMMOD, XK_U, externalpipe, {.v = openurlcmd}},
     {TERMMOD, XK_Y, externalpipe, {.v = copyurlcmd}},
-    {TERMMOD, XK_P, externalpipe, {.v = copypwd}},
+    {TERMMOD, XK_W, externalpipe, {.v = copypwd}},
 
     {TERMMOD, XK_E, externalpipe, {.v = copyemoji}},
 
     {TERMMOD, XK_Return, newterm, {.i = 0}},
 
     {TERMMOD, XK_M, invert, {}},
+    {TERMMOD, XK_Y, selpaste, {.i = 0}},
+
+    {ShiftMask, XK_Insert, selpaste, {.i = 0}},
+
+    {TERMMOD, XK_B, sendbreak, {.i = 0}},
+    {TERMMOD, XK_P, autocomplete, {.i = ACMPL_UNDO}},
+
+    // {TERMMOD, XK_Num_Lock, numlock, {.i = 0}},
+    {TERMMOD, XK_N, autocomplete, {.i = ACMPL_WORD}},
+    // {TERMMOD, XK_F, autocomplete, {.i = ACMPL_FUZZY_WORD}},
+    // {TERMMOD, XK_R, autocomplete, {.i = ACMPL_FUZZY}},
+    {TERMMOD, XK_S, autocomplete, {.i = ACMPL_SUFFIX}},
+    // {TERMMOD, XK_S, autocomplete, {.i = ACMPL_SURROUND}},
+    // {TERMMOD, XK_D, autocomplete, {.i = ACMPL_WWORD}},
+    // {TERMMOD, XK_G, autocomplete, {.i = ACMPL_FUZZY_WWORD}},
 };
 
 /*
