@@ -189,18 +189,16 @@ static char *openurlcmd[] = {"/bin/sh", "-c",
                              "'s/^www./http:\\/\\/www\\./g' | wofi --dmenu -p 'Open URL' | xargs -r xdg-open",
                              "externalpipe", NULL};
 
-static char *copyurlcmd[] = {
-    "/bin/sh", "-c",
-    "sed 's/.*│//g' | tr -d '\n' | grep -aEo "
-    "'(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./"
-    "@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed "
-    "'s/^www./http:\\/\\/www\\./g' | wofi --dmenu -p 'Copy URL' | cliphist decode | wl-copy",
-    "externalpipe", NULL};
+static char *copyurlcmd[] = {"/bin/sh", "-c",
+                             "sed 's/.*│//g' | tr -d '\n' | grep -aEo "
+                             "'(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./"
+                             "@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed "
+                             "'s/^www./http:\\/\\/www\\./g' | wofi --dmenu -p 'Copy URL' | wl-copy",
+                             "externalpipe", NULL};
 
 static char *copypwd[] = {
     "/bin/sh", "-c",
-    "pidof $SHELL | xargs pwdx | awk '{print $2}' | uniq | wofi --dmenu -p 'Copy pwd' | "
-    "cliphist decode | wl-copy",
+    "pidof $SHELL | xargs pwdx | awk '{print $2}' | uniq | wofi --dmenu -p 'Copy pwd' | wl-copy",
     "externalpipe", NULL};
 
 static char *copyemoji[] = {
